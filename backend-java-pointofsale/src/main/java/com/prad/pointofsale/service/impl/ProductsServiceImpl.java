@@ -144,6 +144,7 @@ public class ProductsServiceImpl implements ProductsService {
         try {
             products = productsRepo.getReferenceById(id);
 
+            products.setCategory(null);
             productsRepo.delete(products);
         } catch (Exception e) {
             // TODO: handle exception
