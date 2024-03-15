@@ -17,8 +17,8 @@ public interface ProductsRepository extends JpaRepository<Products, Long>{
     List<Products> findByTitleLike(@Nullable String title, Sort sort);
 
     @Nullable
-    List<Products> findByCategory_CategoryId(@Nullable Long id, Sort sort);
+    List<Products> findByCategory_Id(@Nullable Long id, Sort sort);
 
     @Nullable
-    List<Products> findByTitleLikeAndCategory_CategoryId(@Nullable String title, Long id, Sort sort);
+    List<Products> findByTitleLikeAndCategory_Id(@Nullable String title, Long id, Sort sort);
 }

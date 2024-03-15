@@ -25,7 +25,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 
         for (Categories cat : categoriesList) {
             CategoriesResponse categoriesRes = new CategoriesResponse();
-            categoriesRes.setCategory_id(cat.getCategoryId());
+            categoriesRes.setCategory_id(cat.getId());
             categoriesRes.setCategory_name(cat.getCategoryName());
 
             categoriesResList.add(categoriesRes);

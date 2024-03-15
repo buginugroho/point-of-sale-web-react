@@ -48,11 +48,11 @@ public class ProductsServiceImpl implements ProductsService {
         if (title != null && category_id != null) {
             Long catId = Long.parseLong(category_id);
 
-            productsList = productsRepo.findByTitleLikeAndCategory_CategoryId(title, catId, sort);
+            productsList = productsRepo.findByTitleLikeAndCategory_Id(title, catId, sort);
         } else if (category_id != null) {
             Long catId = Long.parseLong(category_id);
 
-            productsList = productsRepo.findByCategory_CategoryId(catId, sort);
+            productsList = productsRepo.findByCategory_Id(catId, sort);
         } else if (title != null) {
             productsList = productsRepo.findByTitleLike(title, sort);
         } else {
@@ -66,7 +66,7 @@ public class ProductsServiceImpl implements ProductsService {
             productsRes.setTitle(product.getTitle());
             productsRes.setPrice(product.getPrice());
             productsRes.setImage(product.getImage());
-            productsRes.setCategory_id(product.getCategory().getCategoryId());
+            productsRes.setCategory_id(product.getCategory().getId());
             productsRes.setCategory_name(product.getCategory().getCategoryName());
 
             productsResList.add(productsRes);
@@ -90,7 +90,7 @@ public class ProductsServiceImpl implements ProductsService {
         productsRes.setTitle(products.getTitle());
         productsRes.setPrice(products.getPrice());
         productsRes.setImage(products.getImage());
-        productsRes.setCategory_id(products.getCategory().getCategoryId());
+        productsRes.setCategory_id(products.getCategory().getId());
         productsRes.setCategory_name(products.getCategory().getCategoryName());
 
         return productsRes;
