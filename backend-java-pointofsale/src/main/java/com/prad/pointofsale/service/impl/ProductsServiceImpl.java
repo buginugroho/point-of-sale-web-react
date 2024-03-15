@@ -46,7 +46,7 @@ public class ProductsServiceImpl implements ProductsService {
         List<Products> productsList;
         if (catId != null) {
             if (title != null) {
-                productsList = productsRepo.findByTitleLikeAndCategory_Id(title, catId, sort);
+                productsList = productsRepo.findByTitleContainsAndCategory_Id(title, catId, sort);
             } else {
                 productsList = productsRepo.findByCategory_Id(catId, sort);
             }
