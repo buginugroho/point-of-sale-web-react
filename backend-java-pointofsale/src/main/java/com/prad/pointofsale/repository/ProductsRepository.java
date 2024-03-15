@@ -14,7 +14,7 @@ import jakarta.annotation.Nullable;
 public interface ProductsRepository extends JpaRepository<Products, Long>{
     
     @Nullable
-    List<Products> findByTitleLike(@Nullable String title, Sort sort);
+    List<Products> findByTitleContains(@Nullable String title, Sort sort);
 
     @Nullable
     List<Products> findByCategory_Id(@Nullable Long id, Sort sort);

@@ -33,30 +33,25 @@ public class ProductsServiceImpl implements ProductsService {
         String sort_by = req.getSort_by();
         String sort_order = req.getSort_order();
 
+        Long catId = (category_id == null) ? null : Long.parseLong(category_id);
+        sort_by = (sort_by == null) ? "id" : sort_by;
+
         Sort sort;
-        if(sort_order == null) {
-            sort = Sort.by("id").ascending();
+        if (sort_order == null || sort_order.equals("asc")) {
+            sort = Sort.by(sort_by).ascending();
         } else {
-            if(sort_by == null) {
-                sort = sort_order.equals("asc") ? Sort.by("id").ascending() : Sort.by("id").descending();
-            } else {
-                sort = sort_order.equals("asc") ? Sort.by(sort_by).ascending() : Sort.by(sort_by).descending();
-            }
+            sort = Sort.by(sort_by).descending();
         }
 
         List<Products> productsList;
-        if (title != null && category_id != null) {
-            Long catId = Long.parseLong(category_id);
-
-            productsList = productsRepo.findByTitleLikeAndCategory_Id(title, catId, sort);
-        } else if (category_id != null) {
-            Long catId = Long.parseLong(category_id);
-
-            productsList = productsRepo.findByCategory_Id(catId, sort);
-        } else if (title != null) {
-            productsList = productsRepo.findByTitleLike(title, sort);
+        if (catId != null) {
+            if (title != null) {
+                productsList = productsRepo.findByTitleLikeAndCategory_Id(title, catId, sort);
+            } else {
+                productsList = productsRepo.findByCategory_Id(catId, sort);
+            }
         } else {
-            productsList = productsRepo.findAll(sort);
+            productsList = (title != null) ? productsRepo.findByTitleContains(title, sort) : productsRepo.findAll(sort);
         }
 
         List<ProductsResponse> productsResList = new ArrayList<>();
