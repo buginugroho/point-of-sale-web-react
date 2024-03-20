@@ -1,4 +1,3 @@
-import React from 'react'
 import { DeleteIcon } from '../assets/Icons';
 import toRupiah from '../utils/Formatter';
 

@@ -61,6 +61,10 @@ function ProductPage() {
     dispatch(removeOrderAction(payload));
   }
 
+  const onClickNavigatePayment = () => {
+    navigate("/payment");
+  }
+
   const onChangeTitleSearch = (title) => {
     setTitleSearch(title.target.value);
   }
@@ -87,18 +91,14 @@ function ProductPage() {
     setCategory(0);
     setSortBy(sort.target.value);
 
-    // if (sort == "default") {
-    //   navigate("/");
-    // } else {
-      navigate({
-        pathname: "",
-        search: createSearchParams({
-          ...(title ? { title } : {}),
-          sort_by: sort.target.value,
-          ...(sort_order ? { sort_order } : {})
-        }).toString()
-      });
-    // }
+    navigate({
+      pathname: "",
+      search: createSearchParams({
+        ...(title ? { title } : {}),
+        sort_by: sort.target.value,
+        ...(sort_order ? { sort_order } : {})
+      }).toString()
+    });
   }
 
   const onClickSortSwap = (order) => {
@@ -267,7 +267,8 @@ function ProductPage() {
                 <p className="text-2xl font-bold">Total</p>
                 <p className="text-2xl font-bold">{toRupiah(amount)}</p>
               </div>
-              <button className={`my-button text-2xl font-bold 
+              <button onClick={orderData?.length > 0 ? () => onClickNavigatePayment() : null} 
+                className={`my-button text-2xl font-bold 
                 ${orderData?.length > 0 ? "order-enable" : "order-disable"}`}>
                 BAYAR
               </button>
