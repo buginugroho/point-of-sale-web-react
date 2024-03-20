@@ -2,15 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-orange-100 min-h-screen;
+  }
+
+  h1, h2, p, span {
+    @apply text-gray-600;
+  }
+}
+
 @layer components {
+  .my-button {
+    @apply h-10 w-20 rounded-md border border-orange-400;
+  }
   
+  .category-active {
+    @apply w-32 bg-orange-500 text-white drop-shadow-md;
+  }
+
+  .category-inactive {
+    @apply w-32 bg-white;
+  }
+
+  .order-enable {
+    @apply h-12 w-full rounded-lg bg-orange-500 text-white;
+  }
+
+  .order-disable {
+    @apply h-12 w-full rounded-lg bg-orange-200 hover:cursor-default;
+  }
 }
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #787878;
   background-color: #242424;
 
   font-synthesis: none;
