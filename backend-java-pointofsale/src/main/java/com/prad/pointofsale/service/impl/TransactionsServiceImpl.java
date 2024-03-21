@@ -52,6 +52,7 @@ public class TransactionsServiceImpl implements TransactionsService {
                 transactionDetailsRes.setQuantity(transactionDetail.getQuantity());
                 transactionDetailsRes.setSubtotal(transactionDetail.getSubtotal());
                 transactionDetailsRes.setProduct_id(transactionDetail.getProduct().getId());
+                transactionDetailsRes.setProduct_title(transactionDetail.getProduct().getTitle());
                 transactionDetailsRes.setTransaction_id(transactionDetail.getTransaction().getId());
 
                 transactionDetailsResList.add(transactionDetailsRes);
@@ -92,6 +93,7 @@ public class TransactionsServiceImpl implements TransactionsService {
             transactionDetailsRes.setQuantity(transactionDetail.getQuantity());
             transactionDetailsRes.setSubtotal(transactionDetail.getSubtotal());
             transactionDetailsRes.setProduct_id(transactionDetail.getProduct().getId());
+            transactionDetailsRes.setProduct_title(transactionDetail.getProduct().getTitle());
             transactionDetailsRes.setTransaction_id(transactionDetail.getTransaction().getId());
 
             transactionDetailsResList.add(transactionDetailsRes);
@@ -127,6 +129,7 @@ public class TransactionsServiceImpl implements TransactionsService {
             transactionDetailsRes.setQuantity(transactionDetail.getQuantity());
             transactionDetailsRes.setSubtotal(transactionDetail.getSubtotal());
             transactionDetailsRes.setProduct_id(transactionDetail.getProduct().getId());
+            transactionDetailsRes.setProduct_title(transactionDetail.getProduct().getTitle());
             transactionDetailsRes.setTransaction_id(transactionDetail.getTransaction().getId());
 
             transactionDetailsResList.add(transactionDetailsRes);

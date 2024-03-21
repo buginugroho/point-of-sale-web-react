@@ -14,6 +14,7 @@ public class TransactionDetailsResponse {
     private Long id;
     private Long transaction_id;
     private Long product_id;
+    private String product_title;
     private Long quantity;
     private Long subtotal;
 }
