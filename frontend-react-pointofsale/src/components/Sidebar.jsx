@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { SidebarCollapseIcon, SidebarExpandIcon } from "../assets/Icons";
 
 function Sidebar() {
@@ -27,24 +28,32 @@ function Sidebar() {
       </div>
       <ul>
         <li>
-          <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
-            <span className="text-xl group-hover:text-white">Produk</span>
-          </div>
+          <Link to="/">
+            <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
+              <span className="text-xl group-hover:text-white">Produk</span>
+            </div>
+          </Link>
         </li>
         <li>
-          <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
-            <span className="text-xl group-hover:text-white">Transaksi</span>
-          </div>
+          <Link to="/transaction">
+            <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
+              <span className="text-xl group-hover:text-white">Transaksi</span>
+            </div>
+          </Link>
         </li>
         <li>
-          <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
-            <span className="text-xl group-hover:text-white">Kategori</span>
-          </div>
+          <Link to="">
+            <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
+              <span className="text-xl group-hover:text-white">Kategori</span>
+            </div>
+          </Link>
         </li>
         <li>
-          <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
-            <span className="text-xl group-hover:text-white">Admin</span>
-          </div>
+          <Link to="">
+            <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
+              <span className="text-xl group-hover:text-white">Admin</span>
+            </div>
+          </Link>
         </li>
       </ul>
     </div>

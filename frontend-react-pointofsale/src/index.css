@@ -14,7 +14,7 @@
 
 @layer components {
   .my-button {
-    @apply h-10 w-20 rounded-md border border-orange-400;
+    @apply h-10 w-20 rounded-md border bg-orange-500 border-orange-400;
   }
   
   .category-active {
