@@ -15,6 +15,7 @@ import Content from "../layouts/Content";
 import myAxios from "../utils/axios";
 import toRupiah from "../utils/Formatter";
 import { SearchIcon, SortAsc, SortDesc } from "../assets/Icons";
+import Sidebar from "../components/Sidebar";
 
 function ProductPage() {
   const navigate = useNavigate();
@@ -149,6 +150,7 @@ function ProductPage() {
 
   return (
     <>
+    <Sidebar />
       <Content>
         <div id="grid-container" className=" h-[34rem] grid grid-cols-10 gap-12">
           {/* Product section */}

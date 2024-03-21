@@ -27,3 +27,21 @@ export const BackIcon = (props) => (
     <path fill="currentColor" d="m5.915 12.5l3.747 3.746q.14.14.15.344q.01.204-.15.364t-.354.16q-.195 0-.354-.16l-4.389-4.389q-.13-.13-.183-.267q-.053-.136-.053-.298t.053-.298q.053-.137.183-.267l4.389-4.389q.14-.14.344-.15q.204-.01.364.15t.16.354t-.16.354L5.915 11.5H19.5q.213 0 .357.143q.143.144.143.357t-.143.357q-.144.143-.357.143H5.915Z"></path>
   </svg>
 )
+
+export const SidebarExpandIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>
+    <g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+      <path d="M0 0h24v24H0z"></path>
+      <path fill="currentColor" d="M18 3a3 3 0 0 1 2.995 2.824L21 6v12a3 3 0 0 1-2.824 2.995L18 21H6a3 3 0 0 1-2.995-2.824L3 18V6a3 3 0 0 1 2.824-2.995L6 3h12zm0 2H9v14h9a1 1 0 0 0 .993-.883L19 18V6a1 1 0 0 0-.883-.993L18 5zm-4.387 4.21l.094.083l2 2a1 1 0 0 1 .083 1.32l-.083.094l-2 2a1 1 0 0 1-1.497-1.32l.083-.094L13.585 12l-1.292-1.293a1 1 0 0 1-.083-1.32l.083-.094a1 1 0 0 1 1.32-.083z"></path>
+    </g>
+  </svg>
+)
+
+export const SidebarCollapseIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>
+    <g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+      <path d="M0 0h24v24H0z"></path>
+      <path fill="currentColor" d="M18 3a3 3 0 0 1 2.995 2.824L21 6v12a3 3 0 0 1-2.824 2.995L18 21H6a3 3 0 0 1-2.995-2.824L3 18V6a3 3 0 0 1 2.824-2.995L6 3h12zm0 2H9v14h9a1 1 0 0 0 .993-.883L19 18V6a1 1 0 0 0-.883-.993L18 5zm-2.293 4.293a1 1 0 0 1 .083 1.32l-.083.094L14.415 12l1.292 1.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.32.083l-.094-.083l-2-2a1 1 0 0 1-.083-1.32l.083-.094l2-2a1 1 0 0 1 1.414 0z"></path>
+    </g>
+  </svg>
+)
