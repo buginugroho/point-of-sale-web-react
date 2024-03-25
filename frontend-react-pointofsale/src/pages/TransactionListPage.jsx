@@ -69,12 +69,12 @@ function TransactionListPage() {
     }
   ];
 
-  if (!transactions.isLoading) return (
+  return (
     <>
       <Sidebar />
       <Content>
         <div id="container" className="h-[34rem]">
-        {/* Transaction section */}
+          {/* Transaction section */}
           <section>
             {/* header div */}
             <div className="h-8">
@@ -82,9 +82,12 @@ function TransactionListPage() {
             </div>
 
             {/* transaction table div */}
+            {!transactions.isLoading ? (
             <div className="mt-4 h-[28rem]">
-              <TanstackTable tableData={transactions.data} tableColumns={columns}/>
+              <TanstackTable tableData={transactions.data} tableColumns={columns} />
             </div>
+            ) : null}
+
           </section>
         </div>
       </Content>
