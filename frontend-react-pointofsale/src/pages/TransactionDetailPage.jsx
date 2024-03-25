@@ -100,8 +100,8 @@ function TransactionDetailPage() {
                   <div className="flex flex-col col-span-6 px-1">
                     <p>{transactionDetails.data.id}</p>
                     <p>{transactionDetails.data.transaction_date.substring(0, 10)}</p>
-                    <p>{transactionDetails.data.total_amount}</p>
-                    <p>{transactionDetails.data.total_pay}</p>
+                    <p>{toRupiah(transactionDetails.data.total_amount)}</p>
+                    <p>{toRupiah(transactionDetails.data.total_pay)}</p>
                   </div>
                 ) : null}
               </div>
