@@ -5,6 +5,7 @@ import PaymentPage from './pages/PaymentPage';
 import TransactionListPage from './pages/TransactionListPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import AdminPage from './pages/AdminPage';
+import AdminFormPage from './pages/AdminFormPage';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path='/transaction' element={<TransactionListPage />}/>
         <Route path='/transaction/:id' element={<TransactionDetailPage />}/>
         <Route path='/admin' element={<AdminPage />}/>
+        <Route path='/admin/newProduct' element={<AdminFormPage />}/>
+        <Route path='/admin/newProduct/:id' element={<AdminFormPage />}/>
       </Routes>
     </>
   );

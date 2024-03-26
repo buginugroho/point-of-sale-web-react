@@ -17,6 +17,18 @@ function AdminPage() {
     navigate(`./${id}`);
   }
 
+  const onClickNavigateFormAdd = () => {
+    navigate(`./newProduct`);
+  }
+
+  const onClickNavigateFormEdit = (id) => {
+    navigate(`./newProduct/${id}`);
+  }
+
+  const onClickDeleteProduct = () => {
+
+  }
+
   const columns = [
     {
       header: "ID Produk",
@@ -64,7 +76,7 @@ function AdminPage() {
             Detail
           </button>
           <button
-            // onClick={() => onClickNavigateTransactionDetail(props.row.original?.id)}
+            onClick={() => onClickNavigateFormEdit(props.row.original?.id)}
             className="my-button text-white font-medium bg-blue-500 border-blue-500 hover:bg-blue-600">
             Edit
           </button>
@@ -88,14 +100,18 @@ function AdminPage() {
             {/* header div */}
             <div className="flex flex-row justify-between h-8">
               <h1 className="text-2xl font-bold">Daftar Produk</h1>
-              <button className="my-button w-36 text-white font-medium hover:bg-orange-600 duration-200">Tambah Produk</button>
+              <button
+                onClick={() => onClickNavigateFormAdd()}
+                className="my-button w-36 text-white font-medium hover:bg-orange-600 duration-200">
+                Tambah Produk
+              </button>
             </div>
 
             {/* product table div */}
             {!products.isLoading ? (
-            <div className="mt-4 h-[28rem]">
-              <TanstackTable tableData={products.data} tableColumns={columns} />
-            </div>
+              <div className="mt-4 h-[28rem]">
+                <TanstackTable tableData={products.data} tableColumns={columns} />
+              </div>
             ) : null}
 
           </section>
