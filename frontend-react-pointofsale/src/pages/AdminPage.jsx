@@ -25,8 +25,13 @@ function AdminPage() {
     navigate(`./newProduct/${id}`);
   }
 
-  const onClickDeleteProduct = () => {
-
+  const onClickDeleteProduct = (id) => {
+    myAxios.delete(`/deleteproduct/${id}`)
+      .then(() => {
+        alert("Produk berhasil dihapus");
+        products.mutate();
+      })
+      .catch((error) => console.log(error));
   }
 
   const columns = [
@@ -81,7 +86,7 @@ function AdminPage() {
             Edit
           </button>
           <button
-            // onClick={() => onClickNavigateTransactionDetail(props.row.original?.id)}
+            onClick={() => onClickDeleteProduct(props.row.original?.id)}
             className="my-button text-white font-medium bg-red-500 border-red-500 hover:bg-red-600">
             Hapus
           </button>
