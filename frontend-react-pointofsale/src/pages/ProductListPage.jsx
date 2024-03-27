@@ -14,7 +14,7 @@ function ProductListPage() {
   const products = useSWR(`/listproduct`, fetcher);
 
   const onClickNavigateProductDetail = (id) => {
-    navigate(`./${id}`);
+    navigate(`./product/${id}`);
   }
 
   const onClickNavigateFormAdd = () => {
@@ -76,7 +76,7 @@ function ProductListPage() {
       cell: (props) => (
         <div className="flex flex-row justify-center gap-2">
           <button
-            // onClick={() => onClickNavigateProductDetail(props.row.original?.id)}
+            onClick={() => onClickNavigateProductDetail(props.row.original?.id)}
             className="my-button text-white font-medium hover:bg-orange-600">
             Detail
           </button>

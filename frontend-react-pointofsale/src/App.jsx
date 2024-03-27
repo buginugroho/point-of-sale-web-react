@@ -6,6 +6,7 @@ import TransactionListPage from './pages/TransactionListPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import ProductListPage from './pages/ProductListPage';
 import ProductFormPage from './pages/ProductFormPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/transaction' element={<TransactionListPage />}/>
         <Route path='/transaction/:id' element={<TransactionDetailPage />}/>
         <Route path='/admin' element={<ProductListPage />}/>
+        <Route path='/admin/product/:id' element={<ProductDetailPage />}/>
         <Route path='/admin/newProduct' element={<ProductFormPage />}/>
         <Route path='/admin/newProduct/:id' element={<ProductFormPage />}/>
       </Routes>
