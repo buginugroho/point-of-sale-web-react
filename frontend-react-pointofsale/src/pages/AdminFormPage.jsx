@@ -20,7 +20,7 @@ function AdminFormPage() {
     title: yup.string().required("Masukkan nama"),
     category: yup.string().required("Pilih kategori"),
     image: yup.string().required("Masukkan URL gambar").url("Format harus URL"),
-    price: yup.number().positive().required("Masukkan harga")
+    price: yup.number().positive("Nominal harus positif").typeError("Masukkan harga")
   });
 
   // react-hook-form
@@ -129,11 +129,11 @@ function AdminFormPage() {
                       <input type="number" id="price"
                         className="h-8 w-full px-2 pb-1 text-xl rounded-md border border-gray-600 outline-gray-600"
                         {...register("price")} />
-                      <p className="absolute -bottom-12 text-red-500">{errors.price?.message}</p>
+                      <p className="absolute -bottom-6 text-red-500">{errors.price?.message}</p>
                     </div>
                   </div>
 
-                  <div className="mt-12">
+                  <div className="mt-10">
                     <button type="submit" className="my-button w-full text-white font-medium hover:bg-orange-600 duration-200">
                       Submit
                     </button>
