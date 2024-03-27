@@ -28,15 +28,10 @@ public class CategoriesController {
     private CategoriesService categoriesSvc;
 
     @GetMapping("/listcategory")
-    public MyHttpResponse<List<CategoriesResponse>> getAllCategories() {
+    public List<CategoriesResponse> getAllCategories() {
         List<CategoriesResponse> categoriesResList = categoriesSvc.getAllCategories();
 
-        return MyHttpResponse.<List<CategoriesResponse>>builder()
-                .data(categoriesResList)
-                .status(HttpStatus.OK)
-                .message("success")
-                .build();
-                
+        return categoriesResList;
     }
 
     @GetMapping("/detailcategory/{id}")
