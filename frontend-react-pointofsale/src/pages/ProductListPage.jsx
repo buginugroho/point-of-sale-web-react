@@ -6,7 +6,7 @@ import Content from "../layouts/Content";
 import myAxios from "../utils/axios";
 import toRupiah from "../utils/Formatter";
 
-function AdminPage() {
+function ProductListPage() {
   const navigate = useNavigate();
 
   const fetcher = (url) => myAxios.get(url).then((response) => response.data);
@@ -126,4 +126,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default ProductListPage;

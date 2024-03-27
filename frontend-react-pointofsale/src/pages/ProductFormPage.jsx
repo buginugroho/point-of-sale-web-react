@@ -8,7 +8,7 @@ import Content from "../layouts/Content";
 import myAxios from "../utils/axios";
 import { BackIcon } from "../assets/Icons";
 
-function AdminFormPage() {
+function ProductFormPage() {
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -149,4 +149,4 @@ function AdminFormPage() {
   );
 }
 
-export default AdminFormPage;
+export default ProductFormPage;
