@@ -7,6 +7,7 @@ import TransactionDetailPage from './pages/TransactionDetailPage';
 import ProductListPage from './pages/ProductListPage';
 import ProductFormPage from './pages/ProductFormPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import CategoryListPage from './pages/CategoryListPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/admin/product/:id' element={<ProductDetailPage />}/>
         <Route path='/admin/newProduct' element={<ProductFormPage />}/>
         <Route path='/admin/newProduct/:id' element={<ProductFormPage />}/>
+        <Route path='/category' element={<CategoryListPage />}/>
       </Routes>
     </>
   );

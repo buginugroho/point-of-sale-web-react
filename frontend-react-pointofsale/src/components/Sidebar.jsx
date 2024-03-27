@@ -42,7 +42,7 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link to="/category">
             <div className="group w-60 py-2 px-4 hover:bg-orange-600 hover:cursor-pointer duration-200">
               <span className="text-xl group-hover:text-white">Kategori</span>
             </div>
