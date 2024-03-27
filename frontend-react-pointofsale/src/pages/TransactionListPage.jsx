@@ -58,7 +58,6 @@ function TransactionListPage() {
       header: "Action",
       cell: (props) => (
         <div className="text-center">
-          {console.log(props.row.original)}
           <button
             onClick={() => onClickNavigateTransactionDetail(props.row.original?.id)}
             className="my-button w-40 text-white font-medium hover:bg-orange-600">
@@ -92,7 +91,7 @@ function TransactionListPage() {
         </div>
       </Content>
     </>
-  )
-};
+  );
+}
 
 export default TransactionListPage;
