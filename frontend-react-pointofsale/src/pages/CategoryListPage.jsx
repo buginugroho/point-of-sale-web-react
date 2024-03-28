@@ -28,7 +28,7 @@ function CategoryListPage() {
     myAxios.delete(`/deletecategory/${id}`)
       .then(() => {
         alert("Kategori berhasil dihapus");
-        products.mutate();
+        categories.mutate();
       })
       .catch((error) => console.log(error));
   }
@@ -76,7 +76,7 @@ function CategoryListPage() {
             Edit
           </button>
           <button
-            // onClick={() => onClickDeleteCategory(props.row.original?.category_id)}
+            onClick={() => onClickDeleteCategory(props.row.original?.category_id)}
             className="my-button text-white font-medium bg-red-500 border-red-500 hover:bg-red-600">
             Hapus
           </button>
