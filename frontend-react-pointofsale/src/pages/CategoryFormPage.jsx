@@ -73,7 +73,7 @@ function CategoryFormPage() {
           <BackIcon className="absolute w-10 h-10 top-2 left-8 hover:cursor-pointer hover:scale-105 duration-200" />
         </div>
         <div id="container" className="h-[34rem]">
-          {/* Product Form section */}
+          {/* Category Form section */}
           <section>
             {/* header div */}
             <div className="h-8">
