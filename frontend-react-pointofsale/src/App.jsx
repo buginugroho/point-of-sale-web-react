@@ -8,6 +8,7 @@ import ProductListPage from './pages/ProductListPage';
 import ProductFormPage from './pages/ProductFormPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CategoryListPage from './pages/CategoryListPage';
+import CategoryFormPage from './pages/CategoryFormPage';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path='/admin/newProduct' element={<ProductFormPage />}/>
         <Route path='/admin/newProduct/:id' element={<ProductFormPage />}/>
         <Route path='/category' element={<CategoryListPage />}/>
+        <Route path='/category/newCategory' element={<CategoryFormPage />}/>
+        <Route path='/category/newCategory/:id' element={<CategoryFormPage />}/>
       </Routes>
     </>
   );

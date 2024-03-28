@@ -66,17 +66,17 @@ function CategoryListPage() {
       cell: (props) => (
         <div className="flex flex-row justify-center gap-2">
           <button
-            // onClick={() => onClickNavigateCategoryDetail(props.row.original?.id)}
+            // onClick={() => onClickNavigateCategoryDetail(props.row.original?.category_id)}
             className="my-button text-white font-medium hover:bg-orange-600">
             Detail
           </button>
           <button
-            onClick={() => onClickNavigateFormEdit(props.row.original?.id)}
+            onClick={() => onClickNavigateFormEdit(props.row.original?.category_id)}
             className="my-button text-white font-medium bg-blue-500 border-blue-500 hover:bg-blue-600">
             Edit
           </button>
           <button
-            // onClick={() => onClickDeleteCategory(props.row.original?.id)}
+            // onClick={() => onClickDeleteCategory(props.row.original?.category_id)}
             className="my-button text-white font-medium bg-red-500 border-red-500 hover:bg-red-600">
             Hapus
           </button>
