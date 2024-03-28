@@ -135,7 +135,7 @@ function ProductFormPage() {
 
                   <div className="mt-10">
                     <button type="submit" className="my-button w-full text-white font-medium hover:bg-orange-600 duration-200">
-                      Submit
+                      {isEdit ? "Edit" : "Submit"}
                     </button>
                   </div>
                 </form>
