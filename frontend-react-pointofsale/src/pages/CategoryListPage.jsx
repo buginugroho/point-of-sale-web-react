@@ -13,7 +13,7 @@ function CategoryListPage() {
   const categories = useSWR(`/listcategory`, fetcher);
 
   const onClickNavigateCategoryDetail = (id) => {
-    navigate(`./category/${id}`);
+    navigate(`./${id}`);
   }
 
   const onClickNavigateFormAdd = () => {
@@ -66,7 +66,7 @@ function CategoryListPage() {
       cell: (props) => (
         <div className="flex flex-row justify-center gap-2">
           <button
-            // onClick={() => onClickNavigateCategoryDetail(props.row.original?.category_id)}
+            onClick={() => onClickNavigateCategoryDetail(props.row.original?.category_id)}
             className="my-button text-white font-medium hover:bg-orange-600">
             Detail
           </button>
