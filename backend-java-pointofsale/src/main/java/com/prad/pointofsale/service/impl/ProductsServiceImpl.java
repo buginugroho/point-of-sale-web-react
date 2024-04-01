@@ -2,18 +2,23 @@ package com.prad.pointofsale.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.prad.pointofsale.model.Categories;
 import com.prad.pointofsale.model.Products;
+import com.prad.pointofsale.model.TransactionDetails;
 import com.prad.pointofsale.model.request.AddProductRequest;
 import com.prad.pointofsale.model.request.RequestParams;
 import com.prad.pointofsale.model.response.ProductsResponse;
 import com.prad.pointofsale.repository.CategoriesRepository;
 import com.prad.pointofsale.repository.ProductsRepository;
+import com.prad.pointofsale.repository.TransactionDetailsRepository;
 import com.prad.pointofsale.service.ProductsService;
 
 @SuppressWarnings("null")
@@ -25,6 +30,9 @@ public class ProductsServiceImpl implements ProductsService {
 
     @Autowired
     private CategoriesRepository categoriesRepo;
+
+    @Autowired
+    private TransactionDetailsRepository transactionDetailsRepo;
 
     @Override
     public List<ProductsResponse> getAllProducts(RequestParams req) {
@@ -72,78 +80,89 @@ public class ProductsServiceImpl implements ProductsService {
 
     @Override
     public ProductsResponse getProductDetail(Long id) {
-        Products products = new Products();
+        Optional<Products> products = productsRepo.findById(id);
 
-        try {
-            products = productsRepo.findById(id).get();
-        } catch (Exception e) {
-            // TODO: handle exception
+        if (!products.isPresent()) {
+            return null;
         }
 
         ProductsResponse productsRes = new ProductsResponse();
-        productsRes.setId(products.getId());
-        productsRes.setTitle(products.getTitle());
-        productsRes.setPrice(products.getPrice());
-        productsRes.setImage(products.getImage());
-        productsRes.setCategory_id(products.getCategory().getId());
-        productsRes.setCategory_name(products.getCategory().getCategoryName());
+        productsRes.setId(products.get().getId());
+        productsRes.setTitle(products.get().getTitle());
+        productsRes.setPrice(products.get().getPrice());
+        productsRes.setImage(products.get().getImage());
+        productsRes.setCategory_id(products.get().getCategory().getId());
+        productsRes.setCategory_name(products.get().getCategory().getCategoryName());
 
         return productsRes;
     }
 
     @Override
     public void addProduct(AddProductRequest req) {
+        if (req.getTitle() == "" || req.getCategory_id() < 1
+                || req.getImage() == "" || req.getPrice() < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Data tidak boleh kosong");
+        }
+
         Products products = new Products();
 
         Categories cat = new Categories();
 
-        try {
-            cat = categoriesRepo.findById(req.getCategory_id()).get();
+        cat = categoriesRepo.findById(req.getCategory_id()).get();
 
-            products.setTitle(req.getTitle());
-            products.setImage(req.getImage());
-            products.setPrice(req.getPrice());
-            products.setCategory(cat);
+        products.setTitle(req.getTitle());
+        products.setImage(req.getImage());
+        products.setPrice(req.getPrice());
+        products.setCategory(cat);
 
-            productsRepo.save(products);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        productsRepo.save(products);
     }
 
     @Override
     public void updateProduct(Long id, AddProductRequest req) {
-        Products products = new Products();
+        Optional<Products> products = productsRepo.findById(id);
+
+        if (!products.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Produk tidak ditemukan");
+        }
+
+        if (req.getTitle() == "" || req.getCategory_id() < 1
+                || req.getImage() == "" || req.getPrice() < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Data tidak boleh kosong");
+        }
 
         Categories cat = new Categories();
+        cat = categoriesRepo.findById(req.getCategory_id()).get();
 
-        try {
-            cat = categoriesRepo.findById(req.getCategory_id()).get();
-            products = productsRepo.getReferenceById(id);
+        products.get().setTitle(req.getTitle());
+        products.get().setImage(req.getImage());
+        products.get().setPrice(req.getPrice());
+        products.get().setCategory(cat);
 
-            products.setTitle(req.getTitle());
-            products.setImage(req.getImage());
-            products.setPrice(req.getPrice());
-            products.setCategory(cat);
-
-            productsRepo.save(products);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        productsRepo.save(products.get());
     }
 
     @Override
     public void deleteProduct(Long id) {
-        Products products = new Products();
+        Optional<Products> products = productsRepo.findById(id);
 
-        try {
-            products = productsRepo.getReferenceById(id);
-
-            products.setCategory(null);
-            productsRepo.delete(products);
-        } catch (Exception e) {
-            // TODO: handle exception
+        if (!products.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Produk tidak ditemukan");
         }
+
+        List<TransactionDetails> transactionDetails = transactionDetailsRepo.findByProduct(products.get());
+
+        if (transactionDetails.size() > 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Produk sudah terdaftar di dalam transaksi");
+        }
+
+        products.get().setCategory(null);
+        productsRepo.delete(products.get());
     }
 
 }

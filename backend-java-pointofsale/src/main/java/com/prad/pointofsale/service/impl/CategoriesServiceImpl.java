@@ -2,9 +2,12 @@ package com.prad.pointofsale.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.prad.pointofsale.model.Categories;
 import com.prad.pointofsale.model.request.AddCategoriesRequest;
@@ -37,63 +40,68 @@ public class CategoriesServiceImpl implements CategoriesService {
 
     @Override
     public CategoriesResponse getCategoryDetail(Long id) {
-        Categories categories = new Categories();
+        Optional<Categories> categories = categoriesRepo.findById(id);
 
-        try {
-            categories = categoriesRepo.findById(id).get();
-        } catch (Exception e) {
-            // TODO: handle exception
+        if (!categories.isPresent()) {
+            return null;
         }
 
         CategoriesResponse categoriesRes = new CategoriesResponse();
-        categoriesRes.setCategory_id(categories.getId());
-        categoriesRes.setCategory_name(categories.getCategoryName());
-        categoriesRes.setTotal_products(Long.valueOf(categories.getProduct().size()));
+        categoriesRes.setCategory_id(categories.get().getId());
+        categoriesRes.setCategory_name(categories.get().getCategoryName());
+        categoriesRes.setTotal_products(Long.valueOf(categories.get().getProduct().size()));
 
         return categoriesRes;
     }
 
     @Override
     public void addCategory(AddCategoriesRequest req) {
+        if (req.getCategory_name() == "") {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Nama kategori tidak boleh kosong");
+        }
+
         Categories categories = new Categories();
 
-        try {
-            categories.setCategoryName(req.getCategory_name());
+        categories.setCategoryName(req.getCategory_name());
 
-            categoriesRepo.save(categories);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        
+        categoriesRepo.save(categories);
     }
 
     @Override
     public void updateCategory(Long id, AddCategoriesRequest req) {
-        Categories categories = new Categories();
+        Optional<Categories> categories = categoriesRepo.findById(id);
 
-        try {
-            categories = categoriesRepo.getReferenceById(id);
-            categories.setCategoryName(req.getCategory_name());
-
-            categoriesRepo.save(categories);
-        } catch (Exception e) {
-            // TODO: handle exception
+        if (!categories.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Kategori tidak ditemukan");
         }
-        
+
+        if (req.getCategory_name() == "") {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Nama kategori tidak boleh kosong");
+        }
+
+        categories.get().setCategoryName(req.getCategory_name());
+
+        categoriesRepo.save(categories.get());
     }
 
     @Override
     public void deleteCategory(Long id) {
-        Categories categories = new Categories();
+        Optional<Categories> categories = categoriesRepo.findById(id);
 
-        try {
-            categories = categoriesRepo.getReferenceById(id);
-
-            categoriesRepo.delete(categories);
-        } catch (Exception e) {
-            // TODO: handle exception
+        if (!categories.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Kategori tidak ditemukan");
         }
-        
+
+        if (categories.get().getProduct().size() > 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Kategori yang sudah memiliki produk tidak bisa dihapus");
+        }
+
+        categoriesRepo.delete(categories.get());
     }
 
 }

@@ -52,32 +52,35 @@ public class ProductController {
     }
 
     @PostMapping("/addproduct")
-    public MyHttpResponse<String> addProduct(@RequestBody AddProductRequest req) {
-        productSvc.addProduct(req);
+    public MyHttpResponse<?> addProduct(@RequestBody AddProductRequest req) {
+        MyHttpResponse<?> res = new MyHttpResponse<>();
 
-        return MyHttpResponse.<String>builder()
-                .status(HttpStatus.OK)
-                .message("success")
-                .build();
+        productSvc.addProduct(req);
+        res.setStatus(HttpStatus.OK);
+        res.setMessage("success");
+
+        return res;
     }
 
     @PutMapping("/updateproduct/{id}")
-    public MyHttpResponse<String> updateProduct(@RequestBody AddProductRequest req, @PathVariable("id") Long id) {
+    public MyHttpResponse<?> updateProduct(@RequestBody AddProductRequest req, @PathVariable("id") Long id) {
+        MyHttpResponse<?> res = new MyHttpResponse<>();
+        
         productSvc.updateProduct(id, req);
+        res.setStatus(HttpStatus.OK);
+        res.setMessage("success");
 
-        return MyHttpResponse.<String>builder()
-                .status(HttpStatus.OK)
-                .message("success")
-                .build();
+        return res;
     }
 
     @DeleteMapping("/deleteproduct/{id}")
-    public MyHttpResponse<String> deleteProduct(@PathVariable("id") Long id) {
-        productSvc.deleteProduct(id);
+    public MyHttpResponse<?> deleteProduct(@PathVariable("id") Long id) {
+        MyHttpResponse<?> res = new MyHttpResponse<>();
 
-        return MyHttpResponse.<String>builder()
-                .status(HttpStatus.OK)
-                .message("success")
-                .build();
+        productSvc.deleteProduct(id);
+        res.setStatus(HttpStatus.OK);
+        res.setMessage("success");
+
+        return res;
     }
 }
