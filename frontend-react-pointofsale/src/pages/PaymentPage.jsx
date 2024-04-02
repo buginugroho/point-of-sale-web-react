@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import { BackIcon } from "../assets/Icons";
 import { emptyStateAction } from "../store/reducers/orderSlice";
 import CardOrderBig from "../components/CardOrderBig";
@@ -38,14 +39,30 @@ function PaymentPage() {
       total_pay: pay,
       transaction_details
     };
-    
+
     myAxios.post(`/addtransaction`, payload)
       .then((response) => {
-        console.log(response.data);
-        dispatch(emptyStateAction());
-        navigate("/");
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil!",
+          text: "Pesanan berhasil dibuat",
+          confirmButtonText: "Selesai",
+          confirmButtonColor: "#3b82f6"
+        })
+          .then((result) => {
+            if (result.isConfirmed) {
+              dispatch(emptyStateAction());
+              navigate("/");
+            }
+          });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Gagal...",
+          text: "Pesanan gagal dibuat"
+        })
+      });
   }
 
   return (

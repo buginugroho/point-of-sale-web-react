@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Sidebar from "../components/Sidebar";
 import TanstackTable from "../components/TanstackTable";
 import Content from "../layouts/Content";
@@ -25,12 +26,36 @@ function CategoryListPage() {
   }
 
   const onClickDeleteCategory = (id) => {
-    myAxios.delete(`/deletecategory/${id}`)
-      .then(() => {
-        alert("Kategori berhasil dihapus");
-        categories.mutate();
-      })
-      .catch((error) => console.log(error));
+    Swal.fire({
+      icon: "warning",
+      title: "Lanjut hapus kategori?",
+      text: "Kategori akan terhapus permanen",
+      confirmButtonText: "Hapus",
+      confirmButtonColor: "#ef4444",
+      showCancelButton: true
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          myAxios.delete(`/deletecategory/${id}`)
+            .then(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Berhasil!",
+                text: "Kategori berhasil dihapus",
+                timerProgressBar: true,
+                timer: 2000
+              })
+              categories.mutate();
+            })
+            .catch((error) => {
+              Swal.fire({
+                icon: "error",
+                title: "Gagal...",
+                text: error.response.data.message
+              })
+            });
+        }
+      });
   }
 
   const columns = [

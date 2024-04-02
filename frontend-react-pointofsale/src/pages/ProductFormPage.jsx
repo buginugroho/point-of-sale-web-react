@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
 import Content from "../layouts/Content";
 import myAxios from "../utils/axios";
 import { BackIcon } from "../assets/Icons";
@@ -61,17 +62,49 @@ function ProductFormPage() {
     if (isEdit) {
       myAxios.put(`/updateproduct/${id}`, payload)
         .then(() => {
-          alert("Produk berhasil diupdate!");
-          navigate("/admin");
+          Swal.fire({
+            icon: "success",
+            title: "Berhasil!",
+            text: "Produk berhasil diperbarui",
+            confirmButtonText: "Selesai",
+            confirmButtonColor: "#3b82f6"
+          })
+            .then((result) => {
+              if (result.isConfirmed) {
+                navigate("/admin");
+              }
+            });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Gagal...",
+            text: error.response.data.message
+          })
+        });
     } else {
       myAxios.post(`/addproduct`, payload)
         .then(() => {
-          alert("Produk berhasil ditambahkan!");
-          navigate("/admin");
+          Swal.fire({
+            icon: "success",
+            title: "Berhasil!",
+            text: "Produk berhasil ditambahkan",
+            confirmButtonText: "Selesai",
+            confirmButtonColor: "#3b82f6"
+          })
+            .then((result) => {
+              if (result.isConfirmed) {
+                navigate("/admin");
+              }
+            });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Gagal...",
+            text: error.response.data.message
+          })
+        });
     }
   }
 

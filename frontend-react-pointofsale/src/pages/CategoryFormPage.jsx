@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
 import Content from "../layouts/Content";
 import myAxios from "../utils/axios";
 import { BackIcon } from "../assets/Icons";
@@ -52,17 +53,49 @@ function CategoryFormPage() {
     if (isEdit) {
       myAxios.put(`/updatecategory/${id}`, payload)
         .then(() => {
-          alert("Kategori berhasil diupdate!");
-          navigate("/category");
+          Swal.fire({
+            icon: "success",
+            title: "Berhasil!",
+            text: "Kategori berhasil diperbarui",
+            confirmButtonText: "Selesai",
+            confirmButtonColor: "#3b82f6"
+          })
+            .then((result) => {
+              if (result.isConfirmed) {
+                navigate("/category");
+              }
+            });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Gagal...",
+            text: error.response.data.message
+          })
+        });
     } else {
       myAxios.post(`/addcategory`, payload)
         .then(() => {
-          alert("Kategori berhasil ditambahkan!");
-          navigate("/category");
+          Swal.fire({
+            icon: "success",
+            title: "Berhasil!",
+            text: "Kategori berhasil ditambahkan",
+            confirmButtonText: "Selesai",
+            confirmButtonColor: "#3b82f6"
+          })
+            .then((result) => {
+              if (result.isConfirmed) {
+                navigate("/category");
+              }
+            });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Gagal...",
+            text: error.response.data.message
+          })
+        });
     }
   }
 
